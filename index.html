@@ -108,7 +108,7 @@ body.flying .padbtn,body.landed .padbtn{display:none}
 .pinbox{width:min(100%,320px);background:#152131;border:1px solid #2a3a4c;border-radius:20px;padding:22px 20px 16px;display:grid;gap:16px;text-align:center;color:#ece5d6;font-family:"Atkinson Hyperlegible",system-ui,sans-serif}
 .pinbox h2{margin:0;font-family:"Alfa Slab One",Georgia,serif;font-weight:400;font-size:24px}
 .pinbox p{margin:0;color:#93a0ae;font-size:14px}
-.pindots{display:flex;justify-content:center;gap:14px}
+.pindots{display:flex;justify-content:center;gap:12px}
 .pindots i{width:14px;height:14px;border-radius:50%;border:2px solid #5f6d7c}
 .pindots i.on{background:#f2a93b;border-color:#f2a93b}
 .pinbox.bad .pindots{animation:shake .4s}
@@ -422,7 +422,7 @@ const SCOT=[[-7.5,55.038,-7.5,54.6,-5.515,54.6,-5.535,54.658,-5.574,54.68,-5.694
 </script>
 <script>
 (function(){
-  const T=2988288579;
+  const T=3528495015;
   const H=s=>{let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0;}return h;};
   const isAdmin=()=>!!window.__admin;
   const btn=document.getElementById('padbtn');
@@ -441,16 +441,16 @@ const SCOT=[[-7.5,55.038,-7.5,54.6,-5.515,54.6,-5.535,54.658,-5.574,54.68,-5.694
   function pin(){
     let code='';
     const ov=document.createElement('div');ov.className='pinov';
-    ov.innerHTML='<div class="pinbox" role="dialog" aria-modal="true" aria-label="Skriv inn kode"><h2>Arrangør</h2><p>Skriv inn koden for å se alt før opplåsing.</p><div class="pindots"><i></i><i></i><i></i><i></i></div><div class="pinpad">'+[1,2,3,4,5,6,7,8,9].map(n=>'<button type="button" data-k="'+n+'">'+n+'</button>').join('')+'<button type="button" class="soft" data-k="x">Avbryt</button><button type="button" data-k="0">0</button><button type="button" class="soft" data-k="b" aria-label="Slett">⌫</button></div></div>';
+    ov.innerHTML='<div class="pinbox" role="dialog" aria-modal="true" aria-label="Skriv inn kode"><h2>Arrangør</h2><p>Skriv inn koden for å se alt før opplåsing.</p><div class="pindots"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="pinpad">'+[1,2,3,4,5,6,7,8,9].map(n=>'<button type="button" data-k="'+n+'">'+n+'</button>').join('')+'<button type="button" class="soft" data-k="x">Avbryt</button><button type="button" data-k="0">0</button><button type="button" class="soft" data-k="b" aria-label="Slett">⌫</button></div></div>';
     document.body.appendChild(ov);
     const box=ov.querySelector('.pinbox'),dots=[...ov.querySelectorAll('.pindots i')];
     const draw=()=>dots.forEach((d,i)=>d.classList.toggle('on',i<code.length));
     function press(k){
       if(k==='x'){close(ov);return;}
       if(k==='b'){code=code.slice(0,-1);draw();return;}
-      if(code.length>=4)return;
+      if(code.length>=6)return;
       code+=k;draw();
-      if(code.length===4){
+      if(code.length===6){
         if(H('blatur-'+code)===T){
           ov.remove();paint();
           if(window.__unlockNow)window.__unlockNow();
