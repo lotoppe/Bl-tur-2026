@@ -352,7 +352,7 @@ body.flying .padbtn,body.landed .padbtn{display:none}
 <div id="mount" class="app-mount" style="height:100%"></div>
 <script>
 (function(){
-  const UNLOCK=Date.UTC(2026,9,8,15,38);
+  const UNLOCK=Date.UTC(2026,9,8,15,45);
   let preview=(()=>{try{localStorage.removeItem('blatur-admin');const v=sessionStorage.getItem('blatur-pass');sessionStorage.removeItem('blatur-pass');return v==='1'}catch(e){return false}})();
   document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href]');if(!a||!preview||Date.now()>=UNLOCK)return;const h=a.getAttribute('href')||'';if(/^(index|guide)\.html/.test(h)){try{sessionStorage.setItem('blatur-pass','1')}catch(err){}}},true);
   addEventListener('pageshow',e=>{if(e.persisted&&Date.now()<UNLOCK)location.reload();});
